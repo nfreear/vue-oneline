@@ -1,0 +1,30 @@
+<!doctype html> <title> Vue-oneline demo </title>
+
+<h1> Vue-oneline demo </h1>
+
+<div id="app">
+
+  <!-- <test-items x-count="30" ref="test"> -->
+
+    {{ appdebug('Hello world!', 3) }}
+
+    <ol>
+      <li
+        v-for="(item, index) in reverseItems( 8 )"
+        :key="item.id"
+        >Item {{ item.name }}</li>
+    </ol>
+
+  <!-- </test-items> -->
+
+</div>
+
+<script data-CDN-src="https://unpkg.com/vue-oneline"></script>
+
+<script src="../index.js"></script>
+
+<pre>
+
+&copy; NDF, 12-June-2019.
+
+</pre>

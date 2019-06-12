@@ -1,0 +1,8 @@
+{
+  "name": "vue-oneline",
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "A one-line Javascript include to mount a Vue.js, and quickly hack one file prototypes.",
+  "main": "./index.js",
+  "browser": "./index.js"
+}
