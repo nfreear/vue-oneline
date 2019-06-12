@@ -1,10 +1,11 @@
 <!doctype html> <title> Vue-oneline demo </title>
 
+<link rel=stylesheet href="demo.css">
+
 <h1> Vue-oneline demo </h1>
 
-<div id="app">
 
-  <!-- <test-items x-count="30" ref="test"> -->
+<div id="app">
 
     {{ appdebug('Hello world!', 3) }}
 
@@ -12,19 +13,36 @@
       <li
         v-for="(item, index) in reverseItems( 8 )"
         :key="item.id"
-        >Item {{ item.name }}</li>
+        >Item {{ item.name + 1 }}</li>
     </ol>
 
-  <!-- </test-items> -->
+    <hello-world :name="'Nick'"/>
 
 </div>
+
 
 <script data-CDN-src="https://unpkg.com/vue-oneline"></script>
 
 <script src="../index.js"></script>
 
+
+<script>
+  OneLine().then(done => {
+
+    Vue.component('hello-world', {
+
+      props: { name: String },
+
+      template: '<em> Hello {{ name }}! I\'m a component. </em>',
+    })
+
+    done()
+  })
+</script>
+
+
 <pre>
 
-&copy; NDF, 12-June-2019.
+© NDF, 12-June-2019.
 
 </pre>

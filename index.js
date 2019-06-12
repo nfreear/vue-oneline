@@ -1,42 +1,55 @@
 /*!
-  NDF, 12-June-2019.
+  © Nick Freear, 12-June-2019 | License: MIT.
 */
 
-((W, D) => {
+((WIN, DOC) => {
+  'use strict';
 
-  let sc = D.createElement('script')
+  const APP_ELEMENT = '#app';
+  const REJECT_TIMEOUT = 8 * 1000;
 
-  sc.src = 'https://unpkg.com/vue/dist/vue.js';
-  sc.onload = () => {
+  WIN.OneLine = () => {
+    let promise = new Promise((resolve, reject) => {
+      let sc = DOC.createElement('script');
 
-    /* W.Vue.component('TestItems', {
-      template: '<test-items><slot></slot></test-items>',
+      sc.src = 'https://unpkg.com/vue/dist/vue.js';
 
-      mounted () {
-        console.debug('TestItems.mounted:', this)
-      },
-    }) */
+      sc.onload = () => {
+        resolve(mountVue);
+      };
 
-    let vm = new W.Vue({
-      el: '#app',
+      DOC.head.appendChild(sc);
 
-      data () { return {
-        DEFAULT_COUNT: 10,
+      WIN.setTimeout(() => { reject(Error("OneLine: script 'onload' failed ?!")); }, REJECT_TIMEOUT);
+    });
+
+    return promise;
+  };
+
+  function mountVue () {
+    const Vue = WIN.Vue;
+
+    let vm = new Vue({
+
+      el: APP_ELEMENT,
+
+      data () {
+        return {
+          DEFAULT_COUNT: 10
         // items: [],
         // reverseItems: [],
-      }},
-
-      computed: { },
+        };
+      },
 
       methods: {
         items (count) {
-          count = parseInt(count || this.DEFAULT_COUNT)
+          count = parseInt(count || this.DEFAULT_COUNT);
           let theItems = [];
 
-          const MAKE_ARRAY = Array.from(Array(count).keys())
-          MAKE_ARRAY.forEach((name, id) => theItems.push({ id, name }))
+          const MAKE_ARRAY = Array.from(Array(count).keys());
+          MAKE_ARRAY.forEach((name, id) => theItems.push({ id, name }));
 
-          console.warn('App.theItems:', theItems);
+          console.warn('App.items:', theItems);
           return theItems;
         },
 
@@ -44,17 +57,14 @@
           return this.items(count).reverse();
         },
 
-        appdebug (...values) { console.warn(values) },
+        appdebug (...values) { console.warn(...values); }
       },
 
       mounted () {
-        // Vue.nextTick(() => this.setupItems())
+        console.warn('App.mounted:', Vue.version, Vue.config, this);
+      }
+    });
 
-        console.warn('App.mounted:', this, Vue.config)
-      },
-    })
-  }
-
-  D.body.appendChild(sc)
-
-})(window, window.document)
+    return vm;
+  } // End: mountVue.
+})(window, window.document);
