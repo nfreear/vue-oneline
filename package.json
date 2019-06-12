@@ -2,7 +2,7 @@
   "name": "vue-oneline",
   "version": "1.1.0",
   "license": "MIT",
-  "description": "A one-line Javascript include to mount a Vue.js, and quickly hack single file prototypes.",
+  "description": "A one-line Javascript include to mount a Vue.js app, and quickly hack single-file prototypes.",
   "repository": "https://github.com/nfreear/vue-oneline.git",
   "author": "Nick Freear",
   "main": "./index.js",

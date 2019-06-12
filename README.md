@@ -1,7 +1,9 @@
 
+[![npm][npm-icon]][npm]
+
 # vue-oneline
 
-A one-line Javascript include to mount a [Vue.js][],
+A one-line Javascript include to mount a [Vue.js][] app,
 and quickly hack single file prototypes.
 
 ## Usage
@@ -35,4 +37,6 @@ and quickly hack single file prototypes.
 License: [MIT][]
 
 [Vue.js]: https://vuejs.org/
+[npm]: https://npmjs.com/package/vue-oneline
+[npm-icon]: https://img.shields.io/npm/v/vue-oneline.svg
 [MIT]: http://nfreear.mit-license.org/

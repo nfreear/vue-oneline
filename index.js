@@ -12,15 +12,12 @@
     let promise = new Promise((resolve, reject) => {
       let sc = DOC.createElement('script');
 
+      DOC.body.appendChild(sc);
+
+      sc.onload = () => resolve(mountVue);
       sc.src = 'https://unpkg.com/vue/dist/vue.js';
 
-      sc.onload = () => {
-        resolve(mountVue);
-      };
-
-      DOC.head.appendChild(sc);
-
-      WIN.setTimeout(() => { reject(Error("OneLine: script 'onload' failed ?!")); }, REJECT_TIMEOUT);
+      WIN.setTimeout(() => reject(Error("OneLine: script 'onload' failed ?!")), REJECT_TIMEOUT);
     });
 
     return promise;
@@ -67,4 +64,6 @@
 
     return vm;
   } // End: mountVue.
+
+  console.warn('OneLine: end');
 })(window, window.document);
