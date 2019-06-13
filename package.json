@@ -5,8 +5,7 @@
   "description": "A one-line Javascript include to mount a Vue.js app, and quickly hack single-file prototypes.",
   "repository": "https://github.com/nfreear/vue-oneline.git",
   "author": "Nick Freear",
-  "main": "./index.js",
-  "browser": "./index.js",
+  "browser": "app.js",
   "keywords": [
     "vue",
     "vuejs"
