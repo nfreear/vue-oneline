@@ -2,16 +2,15 @@
 
 <link rel=stylesheet href="demo.css">
 
-<h1> Vue-oneline demo </h1>
+<div id="app" class="ol-demo">
 
+    <h1> Vue-oneline demo </h1>
 
-<div id="app">
-
-    {{ appdebug('Hello world!', 3) }}
+    {{ oldebug('Hello world!', 3, this) }}
 
     <ol>
       <li
-        v-for="(item, index) in reverseItems( 8 )"
+        v-for="(item, index) in reverseItems"
         :key="item.id"
         >Item {{ item.name + 1 }}</li>
     </ol>
@@ -27,16 +26,18 @@
 
 
 <script>
-  OneLine().then(done => {
+  OneLine({ itemCount: 8 }).then(done => {
 
     Vue.component('hello-world', {
 
       props: { name: String },
 
-      template: '<em> Hello {{ name }}! I\'m a component. </em>',
+      template: '<p><em> Hello {{ name }}! I’m a component. </em></p>',
+
+      mounted () { console.debug('Hello.mounted:', this) }
     })
 
-    done()
+    done() // Important: call 'done()' at the end of your Vue.js hack!
   })
 </script>
 
@@ -44,5 +45,7 @@
 <pre>
 
 © NDF, 12-June-2019.
+
+ * https://npmjs.com/package/vue-oneline
 
 </pre>

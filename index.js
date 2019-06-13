@@ -5,19 +5,27 @@
 ((WIN, DOC) => {
   'use strict';
 
-  const APP_ELEMENT = '#app';
-  const REJECT_TIMEOUT = 8 * 1000;
+  const DEFAULTS = {
+    el: '#app',
+    vuejs: 'https://unpkg.com/vue/dist/vue.js',
+    timeout: 6 * 1000,
+    itemCount: 10
+  };
 
-  WIN.OneLine = () => {
+  let CFG = {};
+
+  WIN.OneLine = (options) => {
+    CFG = Object.assign(DEFAULTS, options);
+
     let promise = new Promise((resolve, reject) => {
       let sc = DOC.createElement('script');
 
       DOC.body.appendChild(sc);
 
       sc.onload = () => resolve(mountVue);
-      sc.src = 'https://unpkg.com/vue/dist/vue.js';
+      sc.src = CFG.vuejs;
 
-      WIN.setTimeout(() => reject(Error("OneLine: script 'onload' failed ?!")), REJECT_TIMEOUT);
+      WIN.setTimeout(() => reject(Error("OneLine: script 'onload' failed.")), CFG.timeout);
     });
 
     return promise;
@@ -28,42 +36,43 @@
 
     let vm = new Vue({
 
-      el: APP_ELEMENT,
+      el: CFG.el,
 
       data () {
         return {
-          DEFAULT_COUNT: 10
-        // items: [],
-        // reverseItems: [],
+          itemCount: CFG.itemCount
+          // items: [],
+          // reverseItems: [],
         };
       },
 
-      methods: {
-        items (count) {
-          count = parseInt(count || this.DEFAULT_COUNT);
+      computed: {
+        items () {
           let theItems = [];
 
-          const MAKE_ARRAY = Array.from(Array(count).keys());
+          const MAKE_ARRAY = Array.from(Array(this.itemCount).keys());
           MAKE_ARRAY.forEach((name, id) => theItems.push({ id, name }));
 
-          console.warn('App.items:', theItems);
+          console.debug('OneLine.items:', theItems);
           return theItems;
         },
 
-        reverseItems (count) {
-          return this.items(count).reverse();
-        },
+        reverseItems () {
+          return this.items.reverse();
+        }
+      },
 
-        appdebug (...values) { console.warn(...values); }
+      methods: {
+        oldebug (...values) { console.warn(...values); }
       },
 
       mounted () {
-        console.warn('App.mounted:', Vue.version, Vue.config, this);
+        console.debug('OneLine.mounted:', Vue.version, Vue.config, CFG, this);
       }
     });
 
     return vm;
-  } // End: mountVue.
+  } // End: mountVue()
 
-  console.warn('OneLine: end');
+  console.debug('OneLine: end');
 })(window, window.document);

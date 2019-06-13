@@ -24,7 +24,7 @@ and quickly hack single file prototypes.
       template: '<p> Hello World! </p>'
     })
 
-    done()
+    done() // Important: call 'done()' at the end of your Vue.js hack!
   })
 </script>
 ```
